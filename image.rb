@@ -22,7 +22,6 @@ class Image
     end
 
     blur_origin.each do |origin| # Covers each case for blurring on edges and middle of the "image"
-      puts "Blur around these coordinates: [#{origin[0]}, #{origin[1]}]"
       if origin == [0, 0]                    # Top Left
         @image[origin[0]][origin[1] + 1] = 1
         @image[origin[0] + 1][origin[1]] = 1
@@ -59,61 +58,7 @@ class Image
       end
     end
 
+    @image
   end
 
 end
-
-image = Image.new([
-  [0, 0, 1, 0],
-  [0, 0, 0, 0],
-  [0, 1, 0, 0],
-  [0, 0, 0, 0]
-])
-
-puts "Before:"
-image.output_image
-puts ""
-image.blur
-puts ""
-puts "After:"
-image.output_image
-puts "----------"
-
-image = Image.new([
-  [0, 0, 0, 0, 1],
-  [0, 0, 0, 1, 0],
-  [1, 0, 0, 0, 0],
-  [0, 0, 0, 0, 1],
-  [0, 1, 0, 0, 0]
-])
-
-puts "Before:"
-image.output_image
-puts ""
-image.blur
-puts ""
-puts "After:"
-image.output_image
-puts "----------"
-
-image = Image.new([
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-])
-
-puts "Before:"
-image.output_image
-puts ""
-image.blur
-puts ""
-puts "After:"
-image.output_image
-puts "----------"
