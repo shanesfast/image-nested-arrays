@@ -21,41 +21,11 @@ class Image
       end
     end
 
-    blur_origin.each do |origin| # Covers each case for blurring on edges and middle of the "image"
-      if origin == [0, 0]                    # Top Left
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-      elsif origin == [0, @image[origin[0]].length - 1] # Top Right
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-      elsif (origin[0] != 0 and origin[0] != @image.length - 1) and origin[1] == 0 # Starting Column
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-      elsif (origin[0] != 0 and origin[0] != @image.length - 1) and origin[1] == @image[origin[0]].length - 1 # Ending Column
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-      elsif origin == [@image.length - 1, 0] # Bottom Left
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-      elsif origin == [@image.length - 1, @image[origin[0]].length - 1] # Bottom Right 
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-      elsif (origin[1] != 0 and origin[1] != @image.length - 1) and origin[0] == 0 # Top Row
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-      elsif (origin[1] != 0 and origin[1] != @image.length - 1) and origin[0] == @image.length - 1 # Bottom Row
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-      else                                    # The Middle
-        @image[origin[0]][origin[1] - 1] = 1
-        @image[origin[0] + 1][origin[1]] = 1
-        @image[origin[0]][origin[1] + 1] = 1
-        @image[origin[0] - 1][origin[1]] = 1
-      end
+    blur_origin.each do |row, col|
+      @image[row][col - 1] = 1 if col - 1 >= 0
+      @image[row + 1][col] = 1 if row + 1 < @image.size 
+      @image[row][col + 1] = 1 if col + 1 < @image[row].size
+      @image[row - 1][col] = 1 if row - 1 >= 0
     end
 
     @image

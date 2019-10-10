@@ -90,4 +90,41 @@ RSpec.describe Image do
       [1, 1, 0, 0, 0, 0, 0, 0, 1, 1]
     ]
   end
+
+  it "Changes 0 values to 1's around an already existing 1 value" do
+    image = Image.new([
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    ])
+    expect(image.blur).to eq [
+      [1, 1, 0, 0, 0, 0, 0, 0, 1, 1]
+    ]
+  end
+
+  it "Changes 0 values to 1's around an already existing 1 value" do
+    image = Image.new([
+      [1], 
+      [0], 
+      [0], 
+      [0], 
+      [0], 
+      [0], 
+      [0], 
+      [0], 
+      [0], 
+      [1]
+    ])
+    expect(image.blur).to eq [
+      [1],
+      [1],
+      [0],
+      [0],
+      [0],
+      [0],
+      [0],
+      [0],
+      [1],
+      [1]
+    ]
+  end
+
 end
