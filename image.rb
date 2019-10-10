@@ -10,7 +10,8 @@ class Image
     end 
   end
 
-  def blur # This should work for any size SQUARE image representation
+  def blur(distance = 1)
+    return @image if distance <= 0 
     blur_origin = []
 
     @image.each_index do |row_index|
@@ -28,7 +29,7 @@ class Image
       @image[row - 1][col] = 1 if row - 1 >= 0
     end
 
-    @image
+    blur(distance - 1)
   end
 
 end
